@@ -1,0 +1,6 @@
+//Arch Fix Steam
+rm ~/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc++.so.6
+
+//Переключение раскладки 
+setxkbmap -layout "ru" // RU - раскладка
+setxkbmap -layout "us" // EN - раскладка

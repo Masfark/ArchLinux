@@ -1,0 +1,98 @@
+Arch Linux XFCE
+
+//Установка шрифта для консоли 
+setfont ruscii_8x16.psfu
+
+//Проверка подключения к интернету
+ping google.com
+
+//Для подключения интернета
+dhcpcd
+
+//Разбивка диска
+cfdisk // Утилита для разбивки диска с псевдографическим интерфейсом
+
+fdisk -l // Просмотр списка подключенных девайсов
+fdisk /dev/sda // Вход в утилиту для разбивки диска
+
+
+//Форматирование разделов
+mkfs.ext2 /dev/sda1 // Форматирование boot раздела
+mkfs.ext4 /dev/sda2 // Форматирование корневого раздела
+mkfs.ext4 /dev/sda4 // Форматирование home раздела
+mkswap /dev/sda3 // Форматирование swap раздела
+
+//Монтирование разделов
+mount /dev/sda2 /mnt // Монтирование корневого раздела
+mkdir /mnt/home // Создание директории home
+mkdir /mnt/boot // Создание директории boot
+mount /dev/sda1 /mnt/boot // Монтирование boot раздела
+mount /dev/sda4 /mnt/home // Монтирование home раздела
+swapon /dev/sda3 // Включение swap раздела
+
+//Выбор зеркал для загрузки
+nano /etc/pacman.d/mirrorlist // Ctrl+W поиск по файлу
+
+//Установка базовой системы
+pacstrap /mnt base base-devel
+
+//Конфигурация fstab
+genfstab -p /mnt >> /mnt/etc/fstab
+
+//Логинемся под root
+arch-chroot /mnt
+
+//Установка hostname
+echo computer_name > /etc/hostname
+
+//Установка временной зоны
+ln -s /usr/share/zoneinfo/zone/subzone /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime // Для Москвы
+
+//Раскоментируем и генерируем локали
+nano /etc/locale.gen // Выбираем нужные локали и раскоментируем
+locale-gen
+
+//Установка языка системы
+echo LANG=ru_RU.UTF-8 > /etc/locale.conf // Перед этим раскоментируем соответсвующую локаль
+
+//Установка шрифта для консоли при загрузке
+echo FONT=ruscii_8x16.psfu > /etc/vconsole.conf // Шрифт с поддержкой русского
+
+//Конфигурация mkinitcpio
+mkinitcpio -p linux
+
+//Установка пароля для root
+passwd // При вводе пароль отображатся не будет (система защиты)
+
+//Установка загрущика grub
+pacman -S grub os-prober // Загрузка самого загрущика
+grub-install /dev/sda // Установка загрущика
+grub-mkconfig -o /boot/grub/grub.cfg // Генерация конфига (не обращать внимание на WARNIG)
+
+//Настройка интернета при загрузке
+ip link //Просмотр интерфейсов
+systemctl enable dhcpcd@interface.service // Подключение интерфейса при загрузке (вместо interface вводим нужный интерфейс)
+
+//Создаем нового пользователя
+useradd -m -g users -G wheel -s /bin/bash username // Вместо username имя пользователя
+
+//Пароль для нового пользователя
+passwd username // Вместо username имя пользователя
+
+//Даем пользователю права администратора
+EDITOR=nano visudo // Раскоментируем строчку для группы wheel
+
+//Добавляем репозитории для pacman
+nano /etc/pacman.conf // Раскоментируем multilib
+// Добавляем репозиторий для установки yaourt
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+
+//Выходим и перезагружаемся
+umount -R /mnt // Размонтируем разделы
+
+//Выбираем
+reboot // Перезагрузка
+poweroff // Выключение
