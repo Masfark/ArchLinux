@@ -23,7 +23,6 @@ systemctl enable vboxservice &&
 systemctl enable NetworkManager &&
 systemctl enable lxdm.service &&
 
-xdg-user-dirs &&
 xdg-user-dirs-update &&
 
 cat /archlinux/done.txt
