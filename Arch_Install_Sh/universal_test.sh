@@ -16,7 +16,7 @@ EDITOR=nano visudo &&
 nano /etc/pacman.conf &&
 
 pacman -Syy
-pacman -S virtualbox-guest-utils xfce4 xfce4-goodies lxdm networkmanager network-manager-applet xorg-xinit xorg-twm xterm alsa-utils gvfs gvfs-afc gvfs-smb gvfs-gphoto2 gvfs-mtp gvfs-goa gvfs-nfs gvfs-google rhythmbox ttf-ubuntu-font-family numix-themes yaourt rsync gedit geany firefox ffmpeg flashplugin libvdpau mono vlc gimp&&
+pacman -S virtualbox-guest-utils xfce4 xfce4-goodies lxdm networkmanager network-manager-applet xorg-xinit xorg-twm xterm alsa-utils gvfs gvfs-afc gvfs-smb gvfs-gphoto2 gvfs-mtp gvfs-goa gvfs-nfs gvfs-google rhythmbox ttf-ubuntu-font-family numix-themes yaourt rsync gedit geany firefox ffmpeg flashplugin libvdpau mono xdg-user-dirs vlc gimp&&
 
 nano /etc/lxdm/lxdm.conf &&
 systemctl enable vboxservice &&
