@@ -4,3 +4,10 @@ rm ~/.steam/steam/ubuntu12_32/steam-runtime/i386/usr/lib/i386-linux-gnu/libstdc+
 //Переключение раскладки 
 setxkbmap -layout "ru" // RU - раскладка
 setxkbmap -layout "us" // EN - раскладка
+
+// Тема
+yaourt gtk-theme-config
+yaourt numix-circle-icon-theme-git
+
+// Other
+sudo pacman -S thunar-archive-plugin unrar zip unzip p7zip
