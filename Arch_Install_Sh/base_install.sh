@@ -1,4 +1,5 @@
 setfont ruscii_8x16.psfu &&
+fdisk /dev/sda &&
 mkfs.ext2 /dev/sda1 &&
 mkfs.ext4 /dev/sda2 &&
 mkfs.ext4 /dev/sda4 &&
