@@ -19,7 +19,7 @@ nano /etc/pacman.d/mirrorlist &&
 
 pacstrap /mnt base base-devel &&
 genfstab -p /mnt >> /mnt/etc/fstab &&
-arch-chroot /mnt &&
+arch-chroot /mnt ;
 
 passwd &&
 echo masfark-pc > /etc/hostname &&
