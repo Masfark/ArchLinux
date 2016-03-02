@@ -18,11 +18,15 @@ nano /etc/pacman.conf &&
 pacman -Syy
 pacman -S virtualbox-guest-utils xfce4 xfce4-goodies lxdm networkmanager network-manager-applet xorg-xinit xorg-twm xterm alsa-utils gvfs gvfs-afc gvfs-smb gvfs-gphoto2 gvfs-mtp gvfs-goa gvfs-nfs gvfs-google rhythmbox ttf-ubuntu-font-family numix-themes yaourt rsync gedit geany firefox ffmpeg flashplugin libvdpau mono xdg-user-dirs vlc gimp&&
 
+cd /home/masfark &&
+git clone https://github.com/masfark/archlinux &&
+
 nano /etc/lxdm/lxdm.conf &&
 systemctl enable vboxservice &&
 systemctl enable NetworkManager &&
 systemctl enable lxdm.service &&
 
 xdg-user-dirs-update &&
+sh ~/archlinux/Arch_Install_Sh/theme.sh &&
 
-cat /archlinux/done.txt
+cat ~/archlinux/done.txt
