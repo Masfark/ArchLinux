@@ -16,4 +16,5 @@ nano /etc/pacman.d/mirrorlist &&
 
 pacstrap /mnt base base-devel &&
 genfstab -p /mnt >> /mnt/etc/fstab &&
+mv archlinux/ /mnt &&
 arch-chroot /mnt
